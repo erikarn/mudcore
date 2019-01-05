@@ -1,0 +1,17 @@
+image: debian/buster
+packages:
+  - libglib2.0-dev
+  - liblua5.2-dev
+  - libtelnet-dev
+  - libzmq3-dev
+  - pkg-config
+  - texinfo
+  - texlive
+sources:
+  - https://git.sr.ht/~jack/mudcore
+tasks:
+  - build: |
+      cd mudcore
+      autoreconf -i
+      ./configure
+      make distcheck
