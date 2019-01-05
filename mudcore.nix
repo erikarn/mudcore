@@ -1,10 +1,9 @@
-{ autoreconfHook, glib, libtelnet, lua, pkgconfig, stdenv, texinfo, zeromq }:
+{ name, src }:
+{ autoreconfHook, git, glib, libtelnet, lua, pkgconfig, runCommand,
+  stdenv, texinfo, zeromq }:
 
-stdenv.mkDerivation rec {
-  name = "mudcore";
-  commit = stdenv.lib.substring 0 7 (stdenv.lib.commitIdFromGitRepo ./.git);
-  version = "git-${commit}";
-  src = ./.;
+stdenv.mkDerivation {
+  inherit name src;
 
   nativeBuildInputs = [ autoreconfHook pkgconfig texinfo ];
   buildInputs = [ glib libtelnet lua zeromq ];
