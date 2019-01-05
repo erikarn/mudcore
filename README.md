@@ -4,7 +4,7 @@ MudCore is a simple MUD server. Game logic is implemented in lua,
 telnet handling is done for you, and the server can communicate with
 the outside world by way of ZeroMQ sockets.
 
-**NOTE:** This project is not under active development. I consider it
+**NOTE:** MudCore is not under active development. I consider it
 feature-complete, but never built a game atop it.
 
 
