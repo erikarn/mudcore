@@ -1,4 +1,4 @@
-image: debian/buster
+image: debian/testing
 packages:
   - libglib2.0-dev
   - liblua5.2-dev
