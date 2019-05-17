@@ -7,3 +7,7 @@ tasks:
   - build: |
       cd mudcore
       nix-build --no-out-link
+triggers:
+  - condition: failure
+    action: email
+    to: jack@jackkelly.name

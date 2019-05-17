@@ -1,5 +1,7 @@
 # MudCore, a simple MUD server
 
+[![builds.sr.ht status](https://builds.sr.ht/~jack/mudcore.svg)](https://builds.sr.ht/~jack/mudcore?)
+
 MudCore is a simple MUD server. Game logic is implemented in lua,
 telnet handling is done for you, and the server can communicate with
 the outside world by way of ZeroMQ sockets.
