@@ -77,4 +77,3 @@ shell with dependencies available.
 To build a tarball for a release, run `make distcheck`. This requires
 a LaTeX distribution. If you do not have one, you can run `nix-shell
 --arg withTools true`, and the shell will have one available.
-
