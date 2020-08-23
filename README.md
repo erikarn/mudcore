@@ -20,8 +20,7 @@ build`; the binary will appear at `./result/bin/mudcore`. You can then
 run it from the project root; this will start a server using the
 example `boot.lua` script.
 
-If you want to install MudCore into your environment, run `nix-env -f
-. -i`.
+If you want to install MudCore into your environment, run `nix-env -f . -i`.
 
 ### Other Systems
 
