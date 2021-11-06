@@ -1,5 +1,8 @@
 image: debian/testing
 packages:
+  - autoconf
+  - automake
+  - autotools-dev
   - libglib2.0-dev
   - liblua5.2-dev
   - libtelnet-dev
