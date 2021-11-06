@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.67])
+AC_PREREQ([2.71])
 AC_INIT([mudcore], [0], [jack@jackkelly.name])
 AC_CONFIG_AUX_DIR([auxfiles])
 AC_CONFIG_HEADERS([config.h])
@@ -11,7 +11,7 @@ AM_INIT_AUTOMAKE([1.11 foreign -Wall -Werror color-tests])
 AM_SILENT_RULES([yes])
 
 # Checks for programs.
-AC_PROG_CC_C99
+AC_PROG_CC
 AC_PROG_SED
 
 # Checks for libraries.

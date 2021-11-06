@@ -15,12 +15,24 @@ feature-complete, but never built a game atop it.
 ### Nix
 
 The easiest way to build MudCore is with
-[Nix](https://nixos.org/nix/). If you have Nix installed, run `nix
-build`; the binary will appear at `./result/bin/mudcore`. You can then
-run it from the project root; this will start a server using the
-example `boot.lua` script.
+[Nix](https://nixos.org/nix/):
 
-If you want to install MudCore into your environment, run `nix-env -f . -i`.
+```
+nix build # With Nix >=2.4, and flakes enabled
+nix-build # Equivalent old-style command
+```
+
+You can then run `./result/bin/mudcore` from the project root; this
+will start a server using the example `boot.lua` script.
+
+You can also install it into your local environment:
+
+```
+# Nix >=2.4, flakes enabled:
+nix profile install git+https://git.sr.ht/~jack/mudcore
+
+nix-env -f . -i # Equivalent old-style command
+```
 
 ### Other Systems
 
@@ -70,9 +82,11 @@ install documentation.
 
 If you are developing a game, you should not need to modify the C
 code. If you want to hack on MudCore itself, you can either install
-dependencies by hand, or if you use Nix, `nix-shell` will give you a
-shell with dependencies available.
+dependencies by hand, or if you use Nix, run one of the following commands:
 
-To build a tarball for a release, run `make distcheck`. This requires
-a LaTeX distribution. If you do not have one, you can run `nix-shell
---arg withTools true`, and the shell will have one available.
+```
+nix develop # Nix >=2.4, flakes enabled
+nix-shell # Equivalent old-style command
+```
+
+To build a tarball for a release, run `make distcheck`.

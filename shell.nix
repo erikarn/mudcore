@@ -1,12 +1,13 @@
-{ nixpkgs ? import <nixpkgs> {}, withTools ? false }:
-
-let
-  inherit (nixpkgs) lib;
-
-  texlive = nixpkgs.texlive.combined.scheme-basic;
-  mudcore = import ./default.nix { inherit nixpkgs; };
-in
-  mudcore.overrideAttrs (oldAttrs: {
-    nativeBuildInputs = oldAttrs.nativeBuildInputs
-      ++ lib.optionals withTools [ texlive ];
-  })
+(import
+  (
+    let
+      lock = builtins.fromJSON (builtins.readFile ./flake.lock);
+    in
+    fetchTarball {
+      url = "https://github.com/edolstra/flake-compat/archive/${lock.nodes.flake-compat.locked.rev}.tar.gz";
+      sha256 = lock.nodes.flake-compat.locked.narHash;
+    }
+  )
+  {
+    src = ./.;
+  }).shellNix
