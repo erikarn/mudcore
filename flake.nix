@@ -7,7 +7,6 @@
       flake = false;
     };
     flake-utils.url = "github:numtide/flake-utils";
-    nixos-emacs.url = "github:nix-community/emacs-overlay";
     nixpkgs.url = "github:nixos/nixpkgs";
   };
 
