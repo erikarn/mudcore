@@ -4,7 +4,7 @@
 , libtelnet
 , lib
 , lua
-, pkgconfig
+, pkg-config
 , stdenv
 , texinfo
 , zeromq
@@ -15,7 +15,7 @@ stdenv.mkDerivation {
   src = ./.;
 
   buildInputs = [ glib libtelnet lua zeromq ];
-  nativeBuildInputs = [ autoreconfHook pkgconfig texinfo ];
+  nativeBuildInputs = [ autoreconfHook pkg-config texinfo ];
 
   meta = with lib; {
     homepage = https://git.sr.ht/~jack/mudcore;
