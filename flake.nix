@@ -12,7 +12,7 @@
 
   outputs = inputs:
     {
-      overlay = final: prev:
+      overlays.default = final: prev:
         {
           mudcore = prev.callPackage ./mudcore.nix {
             lua = final.lua5_2;
@@ -24,11 +24,11 @@
       let
         nixpkgs = import inputs.nixpkgs {
           inherit system;
-          overlays = [ inputs.self.overlay ];
+          overlays = [ inputs.self.overlays.default ];
         };
       in
       {
-        defaultPackage = nixpkgs.mudcore;
+        packages.default = nixpkgs.mudcore;
         devShell = nixpkgs.mudcore.overrideAttrs (oldAttrs: {
           nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [
             nixpkgs.texlive.combined.scheme-basic
