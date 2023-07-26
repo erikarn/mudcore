@@ -132,14 +132,14 @@ static gint lua_zmq_curve_keypair(lua_State* lua) {
 }
 
 static gint lua_zmq_getopt(lua_State* lua) {
-  gint opt = luaL_checkint(lua, 1);
+  gint opt = luaL_checkinteger(lua, 1);
   lua_pushinteger(lua, zmq_ctx_get(context, opt));
   return 1;
 }
 
 static gint lua_zmq_getsockopt(lua_State* lua) {
   gpointer socket = *(gpointer*)luaL_checkudata(lua, 1, SOCKET_TYPE);
-  gint option = luaL_checkint(lua, 2);
+  gint option = luaL_checkinteger(lua, 2);
   union {
     gchar s[ZMQ_IDENTITY_MAXLEN];
     gint i;
@@ -211,7 +211,7 @@ static gint lua_zmq_getsockopt(lua_State* lua) {
 
 static gint lua_zmq_recv(lua_State* lua) {
   gpointer socket = (gpointer*)luaL_checkudata(lua, 1, SOCKET_TYPE);
-  gint flags = luaL_optint(lua, 2, 0);
+  gint flags = luaL_optinteger(lua, 2, 0);
   zmq_msg_t msg;
   zmq_msg_init(&msg);
   if (zmq_msg_recv(&msg, socket, flags) == -1) {
@@ -227,7 +227,7 @@ static gint lua_zmq_send(lua_State* lua) {
   gpointer socket = *(gpointer*)luaL_checkudata(lua, 1, SOCKET_TYPE);
   gsize len;
   const gchar* str = luaL_checklstring(lua, 2, &len);
-  gint flags = luaL_optint(lua, 3, 0);
+  gint flags = luaL_optinteger(lua, 3, 0);
   zmq_msg_t msg;
   zmq_msg_init_data(&msg,
                     memcpy(g_new(gchar, len), str, len),
@@ -242,8 +242,8 @@ static gint lua_zmq_send(lua_State* lua) {
 }
 
 static gint lua_zmq_setopt(lua_State* lua) {
-  gint option = luaL_checkint(lua, 1);
-  gint value = luaL_checkint(lua, 2);
+  gint option = luaL_checkinteger(lua, 1);
+  gint value = luaL_checkinteger(lua, 2);
   if (zmq_ctx_set(context, option, value) == -1) {
     return lua_zmq_error(lua, "zmq_ctx_set");
   }
@@ -252,7 +252,7 @@ static gint lua_zmq_setopt(lua_State* lua) {
 
 static gint lua_zmq_setsockopt(lua_State* lua) {
   gpointer socket = *(gpointer*)luaL_checkudata(lua, 1, SOCKET_TYPE);
-  gint option = luaL_checkint(lua, 2);
+  gint option = luaL_checkinteger(lua, 2);
   union {
     gint i;
     gint64 i64;
@@ -263,11 +263,11 @@ static gint lua_zmq_setsockopt(lua_State* lua) {
   gsize optsize;
   switch (option) {
   case ZMQ_AFFINITY:
-    optval.u64 = luaL_checkint(lua, 3);
+    optval.u64 = luaL_checkinteger(lua, 3);
     optsize = sizeof(optval.u64);
     break;
   case ZMQ_MAXMSGSIZE:
-    optval.i64 = luaL_checkint(lua, 3);
+    optval.i64 = luaL_checkinteger(lua, 3);
     optsize = sizeof(optval.i64);
     break;
   case ZMQ_BACKLOG:
@@ -287,7 +287,7 @@ static gint lua_zmq_setsockopt(lua_State* lua) {
   case ZMQ_TCP_KEEPALIVE_CNT:
   case ZMQ_TCP_KEEPALIVE_IDLE:
   case ZMQ_TCP_KEEPALIVE_INTVL:
-    optval.i = luaL_checkint(lua, 3);
+    optval.i = luaL_checkinteger(lua, 3);
     optsize = sizeof(optval.i);
     break;
   case ZMQ_CONFLATE:
@@ -339,7 +339,7 @@ static gint lua_zmq_setsockopt(lua_State* lua) {
 }
 
 static gint lua_zmq_socket(lua_State* lua) {
-  gint type = luaL_checkint(lua, 1);
+  gint type = luaL_checkinteger(lua, 1);
   gpointer socket = zmq_socket(context, type);
   if (socket == NULL) {
     return lua_zmq_error(lua, "zmq_socket");

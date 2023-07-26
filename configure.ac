@@ -27,7 +27,7 @@ AC_ARG_WITH([lua_package],
 AS_IF([test "$with_lua_package" = check -a -z "$Lua_CFLAGS" -a -z "$Lua_LIBS"],
   [AC_MSG_CHECKING([for lua package])
    lua_package=no
-   m4_foreach([TEST_PKG], [lua, lua5.2, lua-5.2],
+   m4_foreach([TEST_PKG], [lua, lua5.4, lua-5.4],
      [PKG_CHECK_EXISTS([TEST_PKG], [lua_package=TEST_PKG])m4_newline])
    AC_MSG_RESULT([$lua_package])
    AS_IF([test $lua_package = no],

@@ -204,21 +204,23 @@ void lua_descriptor_resume(struct descriptor* descriptor, gint nargs) {
   lua_State* lua = lua_api_get();
   lua_rawgeti(lua, LUA_REGISTRYINDEX, descriptor->thread_ref);
   lua_State* thread;
+  int nres;
 
   if (lua_isnil(lua, -1) || (thread = lua_tothread(lua, -1)) == NULL) {
     ERROR("Descriptor has lost its thread!");
     descriptor_close(descriptor);
   } else {
-    switch (lua_resume(thread, NULL, nargs)) {
+    switch (lua_resume(thread, NULL, nargs, &nres)) {
     case LUA_OK:
       descriptor_drain(descriptor);
       return;
     case LUA_YIELD:
-      lua_settop(thread, 0);
+      lua_pop(thread, nres);
       break;
     default: /* Error. */
       ERROR("Error in lua code: %s", lua_tostring(thread, -1));
       descriptor_drain(descriptor);
+      lua_pop(thread, 1);
       break;
     }
   }
